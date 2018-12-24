@@ -35,7 +35,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://49.4.70.8:3306/casvision?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://60.209.78.70:3306/aosen?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: centling
         hikari:

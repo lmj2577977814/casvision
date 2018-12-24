@@ -1,13 +1,11 @@
 package com.casair.task;
 
 import cn.casair.CasvisionApp;
-import cn.casair.task.VideoRecordTaskHandler;
 import cn.casair.web.rest.util.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -23,6 +21,7 @@ import java.util.Date;
 @SpringBootTest(classes = CasvisionApp.class)
 public class TestTask {
 
+/*
     @Autowired
     private VideoRecordTaskHandler videoRecordTaskHandler;
 
@@ -42,6 +41,7 @@ public class TestTask {
             e.printStackTrace();
         }
     }
+*/
 
 
 
