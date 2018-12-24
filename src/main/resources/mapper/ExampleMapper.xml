@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.casair.repository.ExampleRepository">
+    <sql id="Base_Column_List">
+    id, name, address, age, created_by, created_date, last_modified_by, last_modified_date
+    </sql>
+
+    <resultMap id="BaseResultMap" type="cn.casair.domain.Example">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="last_modified_by" jdbcType="VARCHAR" property="lastModifiedBy" />
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.casair.domain.Example">
+        insert into example (
+            id,
+            name,
+            address,
+            age,
+            created_by,
+            created_date,
+            last_modified_by,
+            last_modified_date
+        )
+        values (
+            #{id,jdbcType=BIGINT},
+            #{name,jdbcType=VARCHAR},
+            #{address,jdbcType=VARCHAR},
+            #{age,jdbcType=INTEGER},
+            #{createdBy,jdbcType=VARCHAR},
+            #{createdDate,jdbcType=TIMESTAMP},
+            #{lastModifiedBy,jdbcType=VARCHAR},
+            #{lastModifiedDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="cn.casair.domain.Example">
+        insert into example
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="lastModifiedBy != null">
+                last_modified_by,
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+               #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null">
+                #{lastModifiedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifiedDate != null">
+                #{lastModifiedDate,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertAll">
+        insert into example(
+            id,
+            name,
+            address,
+            age,
+            created_by,
+            created_date,
+            last_modified_by,
+            last_modified_date
+        ) values
+        <foreach close="" collection="list" index="index" item="item" open="" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.age,jdbcType=INTEGER},
+            #{item.createdBy,jdbcType=VARCHAR},
+            #{item.createdDate,jdbcType=TIMESTAMP},
+            #{item.lastModifiedBy,jdbcType=VARCHAR},
+            #{item.lastModifiedDate,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from example
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByObject" parameterType="cn.casair.domain.Example">
+        delete from example
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from example
+        where id in
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAll">
+       delete from example
+    </delete>
+
+    <update id="updateById" parameterType="cn.casair.domain.Example">
+    update example
+    <set>
+        name = #{name,jdbcType=VARCHAR},
+        address = #{address, jdbcType=VARCHAR},
+        age = #{age, jdbcType=INTEGER},
+        last_modified_by = #{lastModifiedBy, jdbcType=VARCHAR},
+        last_modified_date = #{lastModifiedDate, jdbcType=VARCHAR},
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateByIdSelective" parameterType="cn.casair.domain.Example">
+        update example
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=VARCHAR},
+            </if>
+            last_modified_by = #{lastModifiedBy, jdbcType=TIMESTAMP},
+            last_modified_date = #{lastModifiedDate, jdbcType=TIMESTAMP},
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectOneById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from example
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectOneByObject" parameterType="cn.casair.domain.Example" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from example
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAllByObject" parameterType="cn.casair.domain.Example" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from example
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from example
+    </select>
+
+    <select id="count" parameterType="cn.casair.domain.Example" resultType="long">
+        select count(1)
+        from example
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="countAll" resultType="long">
+        select count(1)
+        from example
+  </select>
+
+</mapper>

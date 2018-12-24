@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.casair.repository.UserRepository">
+    <sql id="Base_Column_List">
+    id, login, password_hash, first_name, last_name, email, activated, lang_key, image_url, activation_key, reset_key, reset_date, created_by, created_date, last_modified_by, last_modified_date
+    </sql>
+
+    <resultMap id="BaseResultMap" type="cn.casair.domain.User">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="login" jdbcType="VARCHAR" property="login" />
+        <result column="password_hash" jdbcType="VARCHAR" property="password" />
+        <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+        <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="activated" jdbcType="TINYINT" property="activated" />
+        <result column="lang_key" jdbcType="VARCHAR" property="langKey" />
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+        <result column="activation_key" jdbcType="VARCHAR" property="activationKey" />
+        <result column="reset_key" jdbcType="VARCHAR" property="resetKey" />
+        <result column="reset_date" jdbcType="TIMESTAMP" property="resetDate" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="last_modified_by" jdbcType="VARCHAR" property="lastModifiedBy" />
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.casair.domain.User">
+        insert into jhi_user(
+            id,
+            login,
+            password_hash,
+            first_name,
+            last_name,
+            email,
+            activated,
+            lang_key,
+            image_url,
+            activation_key,
+            reset_key,
+            reset_date,
+            created_by,
+            created_date,
+            last_modified_by,
+            last_modified_date
+        ) values
+        (
+            #{item.id,jdbcType=BIGINT},
+            #{item.login,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},
+            #{item.firstName,jdbcType=VARCHAR},
+            #{item.lastName,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR},
+            #{item.activated,jdbcType=TINYINT},
+            #{item.langKey,jdbcType=VARCHAR},
+            #{item.imageUrl,jdbcType=VARCHAR},
+            #{item.activationKey,jdbcType=VARCHAR},
+            #{item.resetKey,jdbcType=VARCHAR},
+            #{item.resetDate,jdbcType=TIMESTAMP},
+            #{item.createdBy,jdbcType=VARCHAR},
+            #{item.createdDate,jdbcType=TIMESTAMP},
+            #{item.lastModifiedBy,jdbcType=VARCHAR},
+            #{item.lastModifiedDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="cn.casair.domain.User">
+        insert into jhi_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="login != null">
+                login,
+            </if>
+            <if test="password != null">
+                password_hash,
+            </if>
+            <if test="firstName != null">
+                first_name,
+            </if>
+            <if test="lastName != null">
+                last_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="activated != null">
+                activated,
+            </if>
+            <if test="langKey != null">
+                lang_key,
+            </if>
+            <if test="imageUrl != null">
+                image_url,
+            </if>
+            <if test="activationKey != null">
+                activation_key,
+            </if>
+            <if test="resetKey != null">
+                reset_key,
+            </if>
+            <if test="resetDate != null">
+                reset_date,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="lastModifiedBy != null">
+                last_modified_by,
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="login != null">
+               #{login,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="firstName != null">
+                #{item.firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastName != null">
+                #{item.lastName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{item.email,jdbcType=VARCHAR},
+            </if>
+            <if test="activated != null">
+                #{item.activated,jdbcType=TINYINT},
+            </if>
+            <if test="langKey != null">
+                #{item.langKey,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null">
+                #{item.imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="activationKey != null">
+                #{item.activationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="resetKey != null">
+                #{item.resetKey,jdbcType=VARCHAR},
+            </if>
+            <if test="resetDate != null">
+                #{item.resetDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                #{item.createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                #{item.createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null">
+                #{item.lastModifiedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifiedDate != null">
+                #{item.lastModifiedDate,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertAll">
+        insert into jhi_user(
+        id,
+        login,
+        password_hash,
+        first_name,
+        last_name,
+        email,
+        activated,
+        lang_key,
+        image_url,
+        activation_key,
+        reset_key,
+        reset_date,
+        created_by,
+        created_date,
+        last_modified_by,
+        last_modified_date
+        ) values
+        <foreach close="" collection="list" index="index" item="item" open="" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.login,jdbcType=VARCHAR},
+            #{item.password,jdbcType=VARCHAR},
+            #{item.firstName,jdbcType=VARCHAR},
+            #{item.lastName,jdbcType=VARCHAR}
+            #{item.email,jdbcType=VARCHAR}
+            #{item.activated,jdbcType=TINYINT}
+            #{item.langKey,jdbcType=VARCHAR}
+            #{item.imageUrl,jdbcType=VARCHAR}
+            #{item.activationKey,jdbcType=VARCHAR}
+            #{item.resetKey,jdbcType=VARCHAR}
+            #{item.resetDate,jdbcType=TIMESTAMP}
+            #{item.createdBy,jdbcType=VARCHAR}
+            #{item.createdDate,jdbcType=TIMESTAMP}
+            #{item.lastModifiedBy,jdbcType=VARCHAR}
+            #{item.lastModifiedDate,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from jhi_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByObject" parameterType="cn.casair.domain.User">
+        delete from jhi_user
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="login != null">
+                and login = #{login,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from jhi_user
+        where id in
+        <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAll">
+       delete from jhi_user
+    </delete>
+
+    <update id="updateById" parameterType="cn.casair.domain.User">
+    update jhi_user
+    <set>
+        login = #{login,jdbcType=VARCHAR}
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateByIdSelective" parameterType="cn.casair.domain.User">
+        update jhi_user
+        <set>
+            <if test="login != null">
+                login = #{login,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectOneById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectOneByObject" parameterType="cn.casair.domain.User" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="login != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByObject" parameterType="cn.casair.domain.User" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="login != null">
+                and login = #{login,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+    </select>
+
+    <select id="count" parameterType="cn.casair.domain.User" resultType="long">
+        select count(1)
+        from jhi_user
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="login != null">
+                and login = #{login,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="countAll" resultType="long">
+        select count(1)
+        from jhi_user
+  </select>
+
+
+    <select id="findOneByActivationKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where activation_key = #{activationKey,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findAllByActivatedIsFalseAndCreatedDateBefore" parameterType="java.time.Instant" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where created_date = #{createdDate,jdbcType=TIMESTAMP}  and activated = 0
+    </select>
+
+    <select id="findOneByResetKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where reset_key = #{resetKey,jdbcType=VARCHAR}  and activated = 0
+    </select>
+
+    <select id="findOneByEmailIgnoreCase" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findOneByLogin" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where login = #{login,jdbcType=VARCHAR}
+    </select><select id="findOneByLogin2" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where login = #{login,jdbcType=VARCHAR}
+    </select>
+
+
+
+</mapper>
